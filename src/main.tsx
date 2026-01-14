@@ -1,0 +1,27 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error("Could not find root element to mount to");
+}
+
+try {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} catch (error) {
+  console.error('Failed to render app:', error);
+  rootElement.innerHTML = `
+    <div style="padding: 20px; color: white; background: black; min-height: 100vh;">
+      <h1>Error loading application</h1>
+      <p>${error instanceof Error ? error.message : String(error)}</p>
+      <p>Please check the browser console for more details.</p>
+    </div>
+  `;
+}
